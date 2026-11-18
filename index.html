@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#12172a">
+  <meta name="description" content="BESTIARIO: inventa criaturas y conserva sus fichas en un archivo de campo digital.">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="stylesheet" href="/src/styles/styles.css">
+  <title>BESTIARIO — Archivo de criaturas</title>
+</head>
+<body>
+  <div class="site-shell">
+    <main>
+      <section class="intro" id="inicio" aria-labelledby="intro-title">
+        <div class="scene-nav">
+          <a class="scene-brand" href="#inicio" aria-label="BESTIARIO, inicio"><span class="brand-mark">✳</span> BESTIARIO</a>
+          <nav aria-label="Secciones">
+            <a href="#archivo">Criaturas</a>
+            <a href="#acerca">La historia</a>
+          </nav>
+          <span class="scene-label">UN MUNDO POR DESCUBRIR <span aria-hidden="true">↗</span></span>
+        </div>
+        <div class="scene-glow" aria-hidden="true"></div>
+        <div class="intro-copy">
+          <p class="eyebrow"><span class="tiny-dot"></span> BIENVENIDO, EXPLORADOR</p>
+          <h1 id="intro-title">Un mundo extraño.<br><em>Tus criaturas.</em></h1>
+          <p class="intro-description">
+            Explora criaturas que no existen en ningún mapa. Crea una nueva especie,
+            descubre sus rasgos y haz crecer este pequeño mundo.
+          </p>
+          <div class="intro-actions">
+            <button class="button button-dark" id="new-creature" type="button">
+              Crear criatura <span aria-hidden="true">＋</span>
+            </button>
+            <a class="text-link" href="#archivo">Ver criaturas <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="intro-footnote">
+            <span class="footnote-line"></span>
+            <span><strong id="total-count">—</strong> criaturas descubiertas</span>
+            <span class="footnote-separator" aria-hidden="true">·</span>
+            <span>Tu mundo se guarda aquí</span>
+          </div>
+        </div>
+
+        <div class="feature-frame" aria-label="Ilustración de una criatura del archivo">
+          <div class="feature-topline">
+            <span id="hero-index">CRIATURA ENCONTRADA</span>
+            <span class="feature-symbol" aria-hidden="true">✳</span>
+          </div>
+          <div id="hero-art" class="feature-art" aria-hidden="true"></div>
+          <div class="feature-bottomline">
+            <div>
+              <span class="feature-kicker">CONOCE A</span>
+              <strong id="hero-name">Cargando...</strong>
+            </div>
+            <span id="hero-family">ARCHIVO</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="archive-section" id="archivo" aria-labelledby="archive-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">LAS CRIATURAS</p>
+            <h2 id="archive-title">Habitantes de este mundo<span class="period">.</span></h2>
+          </div>
+          <p>Elige una criatura, descubre su historia o crea otra.</p>
+        </div>
+
+        <div class="archive-tools">
+          <label class="search-field">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="10.8" cy="10.8" r="6.8"></circle>
+              <path d="m16 16 5 5"></path>
+            </svg>
+            <input id="search" type="search" placeholder="Busca una criatura..." autocomplete="off" aria-label="Buscar criaturas">
+          </label>
+          <label class="select-field">
+            <span class="sr-only">Filtrar por familia</span>
+            <select id="family-filter">
+              <option value="">Todos los tipos</option>
+              <option value="Nocturna">Nocturna</option>
+              <option value="Botánica">Botánica</option>
+              <option value="Cristalina">Cristalina</option>
+              <option value="Abisal">Abisal</option>
+            </select>
+          </label>
+          <span class="result-count" id="result-count" aria-live="polite">—</span>
+        </div>
+
+        <div class="creature-grid" id="creature-grid" aria-live="polite"></div>
+
+        <div class="archive-end">
+          <span>¿Imaginaste alguien más?</span>
+          <button class="text-link" id="add-another" type="button">Crear otra criatura <span aria-hidden="true">↗</span></button>
+        </div>
+      </section>
+
+      <section class="about-section" id="acerca" aria-labelledby="about-title">
+        <div>
+          <p class="eyebrow">SOBRE ESTE MUNDO</p>
+          <h2 id="about-title">La imaginación no <em>tiene límites.</em></h2>
+        </div>
+        <div class="about-copy">
+          <p>
+            BESTIARIO es un pequeño mundo de criaturas inventadas. Cada una tiene su propio carácter,
+            su lugar favorito y una historia por contar.
+          </p>
+          <p>
+            Crea, cambia o retira especies de tu colección cuando quieras. Tus descubrimientos
+            quedan guardados en este navegador para la próxima visita.
+          </p>
+          <span>HTML · CSS · TYPESCRIPT · SQLITE / SQL.JS</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>BESTIARIO © <span id="year"></span></span>
+      <span>HECHO PARA EXPLORAR</span>
+      <a href="#inicio">Volver arriba ↑</a>
+    </footer>
+  </div>
+
+  <dialog id="editor-dialog" class="editor-dialog" aria-labelledby="editor-title">
+    <div class="modal-header">
+      <div>
+        <span class="eyebrow">TU LABORATORIO DE CRIATURAS</span>
+        <h2 id="editor-title">Crear criatura</h2>
+      </div>
+      <button class="close-button" id="close-editor" type="button" aria-label="Cerrar formulario">×</button>
+    </div>
+
+    <form id="creature-form" novalidate>
+      <div class="editor-layout">
+        <div class="editor-fields">
+          <label class="field">
+            <span>Nombre de la criatura <b>*</b></span>
+            <input name="name" id="creature-name" maxlength="40" required placeholder="Ej. Ori, el guardián de la bruma">
+          </label>
+          <div class="field-pair">
+            <label class="field">
+              <span>Familia <b>*</b></span>
+              <select name="family" id="creature-family" required>
+                <option value="Nocturna">Nocturna</option>
+                <option value="Botánica">Botánica</option>
+                <option value="Cristalina">Cristalina</option>
+                <option value="Abisal">Abisal</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Temperamento <b>*</b></span>
+              <select name="temperament" id="creature-temperament" required>
+                <option value="Pacífica">Pacífica</option>
+                <option value="Curiosa">Curiosa</option>
+                <option value="Esquiva">Esquiva</option>
+                <option value="Indómita">Indómita</option>
+              </select>
+            </label>
+          </div>
+          <label class="field">
+            <span>Hábitat <b>*</b></span>
+            <input name="habitat" id="creature-habitat" maxlength="60" required placeholder="Ej. Valle de niebla">
+          </label>
+          <label class="field">
+            <span>Rasgo distintivo <b>*</b></span>
+            <input name="trait" id="creature-trait" maxlength="90" required placeholder="Ej. Escucha los sonidos de las estrellas">
+          </label>
+          <fieldset class="color-field">
+            <legend>Color de la especie</legend>
+            <div class="color-options" id="color-options">
+              <label title="Lavanda"><input type="radio" name="color" value="#b8a5d6" checked><span style="--swatch: #b8a5d6"></span><span class="sr-only">Lavanda</span></label>
+              <label title="Pizarra"><input type="radio" name="color" value="#81a8bb"><span style="--swatch: #81a8bb"></span><span class="sr-only">Pizarra</span></label>
+              <label title="Arcilla"><input type="radio" name="color" value="#d5a18b"><span style="--swatch: #d5a18b"></span><span class="sr-only">Arcilla</span></label>
+              <label title="Salvia"><input type="radio" name="color" value="#95a99a"><span style="--swatch: #95a99a"></span><span class="sr-only">Salvia</span></label>
+              <label title="Ámbar"><input type="radio" name="color" value="#d9be85"><span style="--swatch: #d9be85"></span><span class="sr-only">Ámbar</span></label>
+            </div>
+          </fieldset>
+          <label class="field">
+            <span>Nota del explorador <small>(opcional)</small></span>
+            <textarea name="notes" id="creature-notes" rows="3" maxlength="400" placeholder="Cuéntanos algo que nadie sepa de esta criatura..."></textarea>
+          </label>
+          <p class="form-error" id="form-error" role="alert" hidden></p>
+        </div>
+
+        <aside class="preview-panel" aria-label="Vista previa de la criatura">
+          <div class="preview-label">ASÍ SE VERÁ TU CRIATURA</div>
+          <div id="preview-art" class="preview-art" aria-hidden="true"></div>
+          <strong id="preview-name">Sin nombre</strong>
+          <span id="preview-description">ESPECIE NOCTURNA</span>
+          <p>Su apariencia cambia al elegir una familia, temperamento o color.</p>
+        </aside>
+      </div>
+      <div class="editor-actions">
+        <span>Tu criatura se guardará en este navegador.</span>
+        <div>
+          <button class="button button-outline" id="cancel-editor" type="button">Cancelar</button>
+          <button class="button button-dark" id="save-creature" type="submit">Guardar criatura ↗</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="delete-dialog" class="confirm-dialog" aria-labelledby="delete-title">
+    <p class="eyebrow">CONFIRMACIÓN</p>
+    <h2 id="delete-title">¿Despedirte de esta criatura?</h2>
+    <p id="delete-description">Esta acción no se puede deshacer.</p>
+    <div class="confirm-actions">
+      <button class="button button-outline" id="cancel-delete" type="button">Conservar</button>
+      <button class="button button-danger" id="confirm-delete" type="button">Eliminar criatura</button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
