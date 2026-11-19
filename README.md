@@ -1,6 +1,6 @@
 # BESTIARIO - Archivo de criaturas imaginarias
 
-Laboratorio #3 · Desarrollo web · UNIVO · Noviembre 2026
+Laboratorio #3 - Desarrollo web - UNIVO - Noviembre 2026
 
 Una pequeña colección de criaturas que no existen. Se pueden inventar nuevas especies, cambiar su apariencia y conservar sus fichas como en un cuaderno de campo. El dibujo de cada criatura cambia según su familia, color y temperamento.
 
@@ -92,7 +92,7 @@ Verifica en la URL publicada: crear, recargar, editar y eliminar; comprueba tamb
 
 ## Autor
 
-Alvin Rosales · Ingeniería en Desarrollo de Software
+Alvin Rosales - Ingeniería en Desarrollo de Software
 
 ## Diseño (segunda versión)
 
