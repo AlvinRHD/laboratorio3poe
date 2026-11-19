@@ -7,7 +7,7 @@
   <meta name="description" content="BESTIARIO: inventa criaturas y conserva sus fichas en un archivo de campo digital.">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="stylesheet" href="/src/styles/styles.css">
-  <title>BESTIARIO — Archivo de criaturas</title>
+  <title>BESTIARIO - Archivo de criaturas</title>
 </head>
 <body>
   <div class="site-shell">
@@ -17,9 +17,9 @@
           <a class="scene-brand" href="#inicio" aria-label="BESTIARIO, inicio"><span class="brand-mark">✳</span> BESTIARIO</a>
           <nav aria-label="Secciones">
             <a href="#archivo">Criaturas</a>
-            <a href="#acerca">La historia</a>
+            <a href="#acerca">Qué es</a>
           </nav>
-          <span class="scene-label">UN MUNDO POR DESCUBRIR <span aria-hidden="true">↗</span></span>
+          <span class="scene-label">UN MUNDO POR DESCUBRIR <span aria-hidden="true">→</span></span>
         </div>
         <div class="scene-glow" aria-hidden="true"></div>
         <div class="intro-copy">
@@ -31,13 +31,16 @@
           </p>
           <div class="intro-actions">
             <button class="button button-dark" id="new-creature" type="button">
-              Crear criatura <span aria-hidden="true">＋</span>
+              Crear criatura <span aria-hidden="true">+</span>
             </button>
             <a class="text-link" href="#archivo">Ver criaturas <span aria-hidden="true">↓</span></a>
+            <button class="tour-link" id="start-tour" type="button">
+              <span aria-hidden="true">✦</span> Cómo jugar
+            </button>
           </div>
           <div class="intro-footnote">
             <span class="footnote-line"></span>
-            <span><strong id="total-count">—</strong> criaturas descubiertas</span>
+            <span><strong id="total-count">-</strong> criaturas descubiertas</span>
             <span class="footnote-separator" aria-hidden="true">·</span>
             <span>Tu mundo se guarda aquí</span>
           </div>
@@ -86,32 +89,46 @@
               <option value="Abisal">Abisal</option>
             </select>
           </label>
-          <span class="result-count" id="result-count" aria-live="polite">—</span>
+          <span class="result-count" id="result-count" aria-live="polite">-</span>
         </div>
 
         <div class="creature-grid" id="creature-grid" aria-live="polite"></div>
 
         <div class="archive-end">
           <span>¿Imaginaste alguien más?</span>
-          <button class="text-link" id="add-another" type="button">Crear otra criatura <span aria-hidden="true">↗</span></button>
+          <button class="text-link" id="add-another" type="button">Crear otra criatura <span aria-hidden="true">→</span></button>
         </div>
       </section>
 
       <section class="about-section" id="acerca" aria-labelledby="about-title">
-        <div>
-          <p class="eyebrow">SOBRE ESTE MUNDO</p>
-          <h2 id="about-title">La imaginación no <em>tiene límites.</em></h2>
+        <div class="about-heading">
+          <p class="eyebrow">EL MANUAL DEL EXPLORADOR</p>
+          <h2 id="about-title">¿Qué es <em>BESTIARIO?</em></h2>
+          <p class="about-intro">Un pequeño juego de imaginación donde tú decides qué criaturas habitan este mundo.</p>
+          <button class="about-tour" id="tour-replay" type="button">
+            Haz el recorrido <span aria-hidden="true">→</span>
+          </button>
         </div>
         <div class="about-copy">
           <p>
-            BESTIARIO es un pequeño mundo de criaturas inventadas. Cada una tiene su propio carácter,
-            su lugar favorito y una historia por contar.
+            Crea especies inventadas, elige su apariencia y escribe aquello que las hace únicas.
+            Cada creación se convierte en una ficha que puedes volver a consultar.
           </p>
-          <p>
-            Crea, cambia o retira especies de tu colección cuando quieras. Tus descubrimientos
-            quedan guardados en este navegador para la próxima visita.
-          </p>
-          <span>HTML · CSS · TYPESCRIPT · SQLITE / SQL.JS</span>
+          <div class="game-rules" aria-label="Cómo funciona BESTIARIO">
+            <div class="game-rule">
+              <span>01</span>
+              <p><strong>Imagina.</strong> Ponle nombre, familia y personalidad a una criatura.</p>
+            </div>
+            <div class="game-rule">
+              <span>02</span>
+              <p><strong>Descubre.</strong> Explora tu colección y busca por tipo o nombre.</p>
+            </div>
+            <div class="game-rule">
+              <span>03</span>
+              <p><strong>Transforma.</strong> Edita sus rasgos o retírala de tu mundo.</p>
+            </div>
+          </div>
+          <p class="save-note">Tus criaturas se guardan con SQLite en este navegador. Al volver aquí seguirán contigo, aunque no se sincronizan con otros dispositivos.</p>
         </div>
       </section>
     </main>
@@ -129,7 +146,7 @@
         <span class="eyebrow">TU LABORATORIO DE CRIATURAS</span>
         <h2 id="editor-title">Crear criatura</h2>
       </div>
-      <button class="close-button" id="close-editor" type="button" aria-label="Cerrar formulario">×</button>
+      <button class="close-button" id="close-editor" type="button" aria-label="Cerrar formulario">x</button>
     </div>
 
     <form id="creature-form" novalidate>
@@ -196,7 +213,7 @@
         <span>Tu criatura se guardará en este navegador.</span>
         <div>
           <button class="button button-outline" id="cancel-editor" type="button">Cancelar</button>
-          <button class="button button-dark" id="save-creature" type="submit">Guardar criatura ↗</button>
+          <button class="button button-dark" id="save-creature" type="submit">Guardar criatura →</button>
         </div>
       </div>
     </form>
@@ -211,6 +228,27 @@
       <button class="button button-danger" id="confirm-delete" type="button">Eliminar criatura</button>
     </div>
   </dialog>
+
+  <div class="tour" id="tour" hidden>
+    <div class="tour-spotlight" id="tour-spotlight" aria-hidden="true"></div>
+    <section class="tour-card" role="dialog" aria-modal="true"
+             aria-labelledby="tour-title" aria-describedby="tour-text" tabindex="-1">
+      <div class="tour-topline">
+        <span>GUÍA DEL EXPLORADOR</span>
+        <button id="tour-close" class="tour-close" type="button" aria-label="Cerrar guía">×</button>
+      </div>
+      <div class="tour-progress">
+        <span id="tour-count">01 / 05</span>
+        <div id="tour-dots" class="tour-dots" aria-hidden="true"></div>
+      </div>
+      <h2 id="tour-title">Comienza tu aventura</h2>
+      <p id="tour-text">Conoce este mundo paso a paso.</p>
+      <div class="tour-controls">
+        <button id="tour-prev" type="button">← Atrás</button>
+        <button id="tour-next" type="button">Siguiente →</button>
+      </div>
+    </section>
+  </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script type="module" src="/src/main.ts"></script>

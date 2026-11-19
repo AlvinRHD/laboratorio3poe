@@ -1,6 +1,10 @@
+import { ExplorerTour } from './lib/tour';
 import { CreatureController } from './controllers/CreatureController';
 
 document.querySelector('#year')!.textContent = String(new Date().getFullYear());
+
+// La visita guiada funciona independientemente de la base de datos.
+new ExplorerTour().init();
 
 new CreatureController().init().catch(error => {
   console.error('Error al iniciar BESTIARIO:', error);

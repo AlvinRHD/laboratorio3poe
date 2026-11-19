@@ -84,7 +84,7 @@ export class CreatureView {
     const button = document.querySelector<HTMLButtonElement>('#save-creature')!;
 
     title.textContent = creature ? 'Editar criatura' : 'Crear criatura';
-    button.textContent = creature ? 'Guardar cambios ↗' : 'Guardar criatura ↗';
+    button.textContent = creature ? 'Guardar cambios →' : 'Guardar criatura →';
 
     if (creature) {
       for (const field of ['name', 'family', 'habitat', 'temperament', 'trait', 'notes'] as const) {
@@ -158,7 +158,7 @@ export class CreatureView {
           <span class="empty-symbol" aria-hidden="true">✳</span>
           <h3>${all.length ? 'No encontramos esa criatura.' : 'Tu mundo espera su primera criatura.'}</h3>
           <p>${all.length ? 'Prueba con otra búsqueda o familia.' : 'Abre una ficha y comienza a imaginar.'}</p>
-          ${all.length ? '' : '<button class="button button-dark" data-action="new" type="button">Crear criatura ↗</button>'}
+          ${all.length ? '' : '<button class="button button-dark" data-action="new" type="button">Crear criatura →</button>'}
         </div>
       `;
       return;
@@ -191,7 +191,7 @@ export class CreatureView {
           <div class="card-bottom">
             <span class="temperament">${escapeHtml(creature.temperament)}</span>
             <div class="card-actions">
-              <button type="button" data-action="edit" data-id="${creature.id}" aria-label="Editar ${name}">Editar ↗</button>
+              <button type="button" data-action="edit" data-id="${creature.id}" aria-label="Editar ${name}">Editar →</button>
               <button type="button" class="remove-action" data-action="delete" data-id="${creature.id}" aria-label="Eliminar ${name}">Eliminar</button>
             </div>
           </div>

@@ -1,4 +1,4 @@
-# BESTIARIO — Archivo de criaturas imaginarias
+# BESTIARIO - Archivo de criaturas imaginarias
 
 Laboratorio #3 · Desarrollo web · UNIVO · Noviembre 2026
 
@@ -20,6 +20,8 @@ Una pequeña colección de criaturas que no existen. Se pueden inventar nuevas e
 - Editar y eliminar registros con confirmación.
 - Mantener las criaturas al recargar la página.
 - Tres criaturas de ejemplo que aparecen solo la **primera vez** que se abre la aplicación.
+- Recorrido interactivo desde **Cómo jugar** o **Haz el recorrido**, con cinco paradas que señalan las partes de la página.
+- Sección **¿Qué es BESTIARIO?** con explicaciones de la dinámica del juego.
 
 ## Ejecutar en VS Code
 
@@ -61,6 +63,7 @@ bestiario/
     ├── controllers/CreatureController.ts
     ├── lib/creatureArt.ts
     ├── lib/helpers.ts
+    ├── lib/tour.ts
     ├── types/assets.d.ts
     └── styles/styles.css
 ```
@@ -91,7 +94,14 @@ Verifica en la URL publicada: crear, recargar, editar y eliminar; comprueba tamb
 
 Alvin Rosales · Ingeniería en Desarrollo de Software
 
-
 ## Diseño (segunda versión)
 
 La navegación se integra en una portada de fantasía. La colección usa fichas ilustradas, colores suaves y un editor con vista previa. No se modificaron las operaciones SQLite ni la estructura MVC.
+
+## Recorrido de bienvenida
+
+En la portada, el botón **Cómo jugar** abre una guía visual para visitantes nuevos.
+Se puede continuar, regresar o cerrar con **Esc**. No bloquea el acceso al sitio al cargar
+y se puede volver a iniciar desde la sección **¿Qué es BESTIARIO?**.
+
+La guía solo muestra dónde está cada función: no crea ni elimina registros por sí misma.
